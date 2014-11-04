@@ -1,5 +1,6 @@
 "use strict";
 const fs = require('fs');
+//assign spawn to the function 'spawn' from child_process object
 const spawn = require('child_process').spawn;
 const filename = process.argv[2];
 
