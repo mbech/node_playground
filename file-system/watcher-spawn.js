@@ -10,7 +10,16 @@ if(!filename){
 
 fs.watch('target.txt', function(){
   let ls = spawn('ls', ['-lh', filename]);
-  ls.stdout.pipe(process.stdout);
+  let output = '';
+
+  ls.stdout.on('data', function(chunk){
+    output += chunk.toString(); 
+  })
+
+  ls.stdout.on('close', function(chunk){
+    let parts = output.split(/\s+/); 
+    console.dir([parts[0], parts[4], parts[8]]);
+  })
 });
 
 console.log("Watching " + filename + " for changes...");
