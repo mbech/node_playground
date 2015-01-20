@@ -2,8 +2,13 @@ var express = require('express'),
     app = express(),
     port = 3700;
 
-app.get("/", function(request, response){
-  response.send("UP AND RUNNING");
+//Link Jade Templates
+app.set('views', __dirname + '/tpl');
+app.set('view engine', "jade");
+app.engine('jade', require('jade').__express);
+
+app.get("/", function(req, res){
+    res.render("default_page");
 });
 
 app.listen(port);
